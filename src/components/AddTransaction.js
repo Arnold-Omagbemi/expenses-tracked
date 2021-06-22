@@ -7,6 +7,27 @@ export const AddTransaction = () => {
     const [amount, setAmount] = useState(0);
 
     const { addTransaction } = useContext(GlobalContext);
+
+    // get transctions from localStorage 
+   const getTransactionsFromLocalStorage = () => {
+     const i = JSON.parse(localStorage.getItem("transactions"));
+     if (!i) {
+      return [];
+    }
+     return i;
+   };
+   
+   // set items to localstorage;
+
+   const saveToLocalStorage = (transaction) => {
+     //we need to first get the older transactions 
+     const items = getTransactionsFromLocalStorage();
+     localStorage.setItem(
+       "transactions",
+       JSON.stringify([transaction, ...items])
+     )
+   }
+
     const onSubmit = e => {
       e.preventDefault();
       setText('');
@@ -19,6 +40,7 @@ export const AddTransaction = () => {
       }
 
       addTransaction(newTransaction);
+      saveToLocalStorage(newTransaction);
     }
 
     return (
