@@ -4,7 +4,14 @@ import { GlobalContext } from '../context/GlobalSate';
 export const IncomeExpenses = () => {
   const { transactions } = useContext(GlobalContext);
 
-  const amounts = transactions.map(transaction => transaction.amount);
+  const transactionsList = () => {
+    let list = JSON.parse(localStorage.getItem("transactions"));
+    return list;
+};
+
+const list = transactionsList() || transactions;
+
+  const amounts = list.map(transaction => transaction.amount);
   const income = amounts
     .filter(item => item > 0)
     .reduce((acc, item) => (acc += item), 0)
