@@ -1,5 +1,7 @@
 <<<<<<< HEAD
 # expense-tracker
+
+The app helps you keep track of your expenses 
 =======
 # Getting Started with Create React App
 
